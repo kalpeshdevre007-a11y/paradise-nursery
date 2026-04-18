@@ -2,7 +2,7 @@ import React from 'react';
 
 function AboutUs() {
   return (
-    <div className="about-us">
+    <div className="about-us-container">
       <h2>About Paradise Nursery</h2>
       <p>
         Welcome to Paradise Nursery, your one-stop destination for beautiful houseplants.
