@@ -47,59 +47,52 @@ function CartItem({ onContinueShopping }) {
       {/* Navigation bar */}
       <nav className="navbar">
         <h2>Paradise Nursery</h2>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <a href="#" onClick={handleContinueShopping} style={{ color: 'white', textDecoration: 'none' }}>Home</a>
-          <a href="#" onClick={handleContinueShopping} style={{ color: 'white', textDecoration: 'none' }}>Plants</a>
-          <span style={{ color: 'white' }}>🛒 <span className="cart-count">{cartItems.reduce((s, i) => s + i.quantity, 0)}</span></span>
+        <div className="navbar-links">
+          <a href="#" onClick={handleContinueShopping} className="navbar-link">Home</a>
+          <a href="#" onClick={handleContinueShopping} className="navbar-link">Plants</a>
+          <span className="cart-icon">
+            🛒 <span className="cart-count">{cartItems.reduce((s, i) => s + i.quantity, 0)}</span>
+          </span>
         </div>
       </nav>
+
       <div className="cart-container">
         <h2>Shopping Cart</h2>
         {/* Display total cart amount */}
-        <h3>Total Cart Amount: ${totalAmount.toFixed(2)}</h3>
+        <h3 className="cart-total-amount">Total Cart Amount: ${totalAmount.toFixed(2)}</h3>
+
         {cartItems.length === 0 ? (
           <p>Your cart is empty. <a href="#" onClick={handleContinueShopping}>Continue Shopping</a></p>
         ) : (
           cartItems.map(item => (
             <div className="cart-item" key={item.name}>
               {/* Plant thumbnail */}
-              <img src={item.image} alt={item.name} />
-              <div style={{ flex: 1 }}>
+              <img src={item.image} alt={item.name} className="cart-item-image" />
+
+              <div className="cart-item-details">
                 {/* Plant name and pricing */}
-                <h3>{item.name}</h3>
-                <p>Unit Price: ${item.price}</p>
-                <p>Total Cost: ${(item.price * item.quantity).toFixed(2)}</p>
+                <h3 className="cart-item-name">{item.name}</h3>
+                <p className="cart-item-price">Unit Price: ${item.price}</p>
+                <p className="cart-item-total">Total Cost: ${(item.price * item.quantity).toFixed(2)}</p>
+
                 {/* Quantity controls */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <button onClick={() => handleDecrement(item)} style={{ padding: '5px 10px', fontSize: '1rem' }}>-</button>
-                  <span>{item.quantity}</span>
-                  <button onClick={() => handleIncrement(item)} style={{ padding: '5px 10px', fontSize: '1rem' }}>+</button>
+                <div className="cart-item-quantity-controls">
+                  <button onClick={() => handleDecrement(item)} className="cart-btn-decrement">-</button>
+                  <span className="cart-item-quantity">{item.quantity}</span>
+                  <button onClick={() => handleIncrement(item)} className="cart-btn-increment">+</button>
                 </div>
               </div>
+
               {/* Delete button */}
-              <button
-                onClick={() => handleRemove(item)}
-                style={{ background: 'red', color: 'white', border: 'none', padding: '8px 15px', borderRadius: '5px', cursor: 'pointer' }}
-              >
-                Delete
-              </button>
+              <button onClick={() => handleRemove(item)} className="cart-btn-delete">Delete</button>
             </div>
           ))
         )}
+
         {/* Action buttons */}
-        <div style={{ marginTop: '20px' }}>
-          <button
-            onClick={handleContinueShopping}
-            style={{ padding: '10px 30px', marginRight: '10px', background: '#4CAF50', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
-          >
-            Continue Shopping
-          </button>
-          <button
-            onClick={handleCheckout}
-            style={{ padding: '10px 30px', background: '#2196F3', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
-          >
-            Checkout
-          </button>
+        <div className="cart-actions">
+          <button onClick={handleContinueShopping} className="cart-btn-continue">Continue Shopping</button>
+          <button onClick={handleCheckout} className="cart-btn-checkout">Checkout</button>
         </div>
       </div>
     </div>
